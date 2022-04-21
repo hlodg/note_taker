@@ -6,7 +6,7 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 //     - Set body parsing, static middleware, route middleware
-app.use(middleware);
+// app.use(middleware);
 //     - Start the server
 
 // const apiRoutes = require('./routes/apiRoutes');
@@ -16,16 +16,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 //     - Create a "GET" route for `/notes` that returns the `notes.html` file
-app.get('/notes', (req, res)) => res.json();
+app.get('/notes', (req, res) => res.json('notes html'));
 
 //     - Create a GET route for `*` that returns `index.html` file
-app.get('*'(req, res)) => res.json();
 
 //     - Create a GET route for `/api/notes` that returns all saved notes as JSON
-app.get('/api/notes', (req,vres)) => res.json('GET notes');
+app.get('/api/notes', (req,res) => res.json('GET notes'));
 
 //     - Create a POST route for `api/notes` that saves a new note to the db.json file
-app.post ('/api/notes',(req,res)) => res.json();
+app.post ('/api/notes',(req,res) => res.json('POST notes'));
+
+app.get('*',(req, res) => res.json('index.html'));
 
 
 app.listen(PORT, () => console.log(`Listening on PORT: PORT`));
