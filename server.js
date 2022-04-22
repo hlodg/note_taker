@@ -5,6 +5,7 @@ const express = require('express');
 //     - Set up the port that your server will listen on (NOTE: Heroku will set this up for you when you deploy)
 const app = express();
 const path = require('path');
+const { getEnabledCategories } = require('trace_events');
 const PORT = process.env.PORT || 3000;
 //     - Set body parsing, static middleware, route middleware
 // app.use(middleware);
@@ -23,10 +24,10 @@ app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, './public/note
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
 
 //     - Create a GET route for `/api/notes` that returns all saved notes as JSON
-app.get('/api/notes', (req,res) => res.json('GET notes'));
+app.get('/api/notes', (req,res) => res.json('getNotes'));
 
 //     - Create a POST route for `api/notes` that saves a new note to the db.json file
-app.post ('/api/notes',(req,res) => res.json('POST notes'));
+app.post ('/api/notes',(req,res) => res.json('setnotes'));
 
 app.get('*',(req, res) => res.json('index.html'));
 
@@ -36,7 +37,12 @@ app.listen(PORT, () => console.log(`Listening on PORT: PORT`));
 
 // 4. Create helper functions that manage saving and retrieving notes from the db.json file
 //     -Create a getNotes() function that returns all the saved notes from the db.json file
+getNotes() => (fs.readFile('./db.json', utf8, (err, data)=> {
+    console.log(data)}));
+
 //     -Create a saveNote() function that saves a new note to the db.json file and returns the new note as JSON
+
+
 //     -Create a deleteNote() function that deletes a note from the db.json file and returns a success message (bonus)
 
 // 5. Integrate your helper functions into the routes
