@@ -4,7 +4,7 @@
 const express = require('express');
 //     - Set up the port that your server will listen on (NOTE: Heroku will set this up for you when you deploy)
 const app = express();
-const router=express.Router
+const path = require('path');
 const PORT = process.env.PORT || 3000;
 //     - Set body parsing, static middleware, route middleware
 // app.use(middleware);
@@ -17,9 +17,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 //     - Create a "GET" route for `/notes` that returns the `notes.html` file
-app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, '/public/notes.html')));
+app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, './public/notes.html')));
 
 //     - Create a GET route for `*` that returns `index.html` file
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
 
 //     - Create a GET route for `/api/notes` that returns all saved notes as JSON
 app.get('/api/notes', (req,res) => res.json('GET notes'));
